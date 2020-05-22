@@ -3,13 +3,16 @@ info:
   title: Petimus
   version: '1.0'
   description: Petimus API for create and manage test.
+  contact:
+    name: Petimus
+    url: 'http://www.petimus.com'
+    email: web@petimus.com
 servers:
   - url: 'http://localhost:3000'
 paths:
   /theme:
     get:
       summary: Your GET endpoint
-      tags: []
       responses:
         '200':
           description: OK
@@ -21,6 +24,18 @@ paths:
                   $ref: '#/components/schemas/Theme'
       operationId: get-theme
       description: Get the list of theme from a domain.
+    post:
+      summary: ''
+      operationId: post-theme
+      responses:
+        '200':
+          description: OK
+      description: Create a theme
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Theme'
   '/theme/{theme_id}':
     parameters:
       - schema:
@@ -30,7 +45,8 @@ paths:
         required: true
     get:
       summary: Your GET endpoint
-      tags: []
+      tags:
+        - theme
       responses:
         '200':
           description: OK
@@ -50,6 +66,29 @@ paths:
             schema:
               type: object
               properties: {}
+  '/theme/{theme_id}/category':
+    parameters:
+      - schema:
+          type: string
+        name: theme_id
+        in: path
+        required: true
+        description: id of the theme
+    get:
+      summary: Your GET endpoint
+      tags:
+        - theme
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+      operationId: get-theme-theme_id-category
+      description: The list of categories for a specific theme.
 components:
   schemas:
     Theme:
@@ -69,15 +108,17 @@ components:
       title: Category
       type: object
       description: Every Theme has a list of categories.
-      properties:
-        category_id:
-          type: string
-        category_name:
-          type: string
       x-examples:
         example-category:
           category_id: '001'
           category_name: Arrays
+      properties:
+        category_id:
+          type: string
+          description: id of the category
+        category_name:
+          type: string
+          description: name of the category
     Test:
       title: Test
       type: object
