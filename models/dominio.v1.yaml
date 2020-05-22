@@ -1,0 +1,7 @@
+title: dominio
+type: object
+x-tags:
+  - domain
+properties:
+  domain_id:
+    type: string

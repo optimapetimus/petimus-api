@@ -1,0 +1,132 @@
+openapi: 3.0.0
+info:
+  title: Petimus
+  version: '1.0'
+  description: Petimus API helps to create and manage test
+  contact:
+    name: Petimus
+    url: 'http://www.petimus.com'
+    email: web@petimus.com
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/theme/{theme-id}':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '':
+                    type: string
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+      operationId: get-theme
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                '':
+                  type: string
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+      description: Information about a theme.
+    parameters:
+      - schema:
+          type: string
+        name: theme-id
+        in: path
+        required: true
+        description: theme id
+  '/theme/{theme-id}/category/{category-id}':
+    parameters:
+      - schema:
+          type: string
+        name: theme-id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: category-id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+      operationId: get-theme-theme-id-category-category-id
+      description: Get information about one category of a theme.
+  '/theme/{theme-id}/category':
+    parameters:
+      - schema:
+          type: string
+        name: theme-id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-theme-theme-id-category
+      description: Get the list of the categories in a theme.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ''
+        description: ''
+components:
+  schemas:
+    Theme:
+      title: Theme
+      type: object
+      description: ''
+      x-examples:
+        theme-example:
+          theme_id: '001'
+          theme_name: Javascript
+      properties:
+        theme_id:
+          type: string
+          description: theme id. Is a code of three characters (letters and numbers)
+        theme_name:
+          type: string
+    Category:
+      title: Category
+      type: object
+      properties:
+        category_id:
+          type: string
+          description: If of the category
+        category_name:
+          type: string
+          description: Name of the category
+      x-examples:
+        example-category:
+          category_id: '001'
+          category_name: Arrays
+    Categories:
+      title: Categories
+      type: array
+      items:
+        $ref: '#/components/schemas/Category'
+      x-examples:
+        example-categories:
+          - category_id: '001'
+            category_name: Arrays
+          - category_id: '002'
+            category_name: Functions
+      description: A list of information about categories.
