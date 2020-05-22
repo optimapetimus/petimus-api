@@ -89,6 +89,38 @@ paths:
                   $ref: '#/components/schemas/Category'
       operationId: get-theme-theme_id-category
       description: The list of categories for a specific theme.
+  /test:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-test
+  '/test/{test-id}/start':
+    parameters:
+      - schema:
+          type: string
+        name: test-id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-test-test-id-start
+      description: Start the execution of a test
+  '/test/{test-id}/end':
+    parameters:
+      - schema:
+          type: string
+        name: test-id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-test-test-id-end
+      description: End the execution of a test
 components:
   schemas:
     Theme:
@@ -122,14 +154,22 @@ components:
     Test:
       title: Test
       type: object
-      properties:
-        id:
-          type: string
       description: A Test
+      properties:
+        test_id:
+          type: string
+        '':
+          type: string
     Question:
       title: Question
       type: object
-      properties:
-        id:
-          type: string
       description: A question of the test.
+      properties:
+        question-id:
+          type: string
+        category-id:
+          type: string
+        theme-id:
+          type: string
+        statement:
+          type: string
