@@ -5,7 +5,51 @@ info:
   description: Petimus API for create and manage test.
 servers:
   - url: 'http://localhost:3000'
-paths: {}
+paths:
+  /theme:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+      operationId: get-theme
+      description: Get the list of theme from a domain.
+  '/theme/{theme_id}':
+    parameters:
+      - schema:
+          type: string
+        name: theme_id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Theme'
+      operationId: get-theme-theme_id
+      description: Information from a specific theme
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+          application/xml:
+            schema:
+              type: object
+              properties: {}
 components:
   schemas:
     Theme:
