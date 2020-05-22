@@ -7,4 +7,44 @@ servers:
   - url: 'http://localhost:3000'
 paths: {}
 components:
-  schemas: {}
+  schemas:
+    Theme:
+      title: Theme
+      type: object
+      properties:
+        theme_id:
+          type: string
+        theme_name:
+          type: string
+      x-examples:
+        example-theme:
+          theme_id: '001'
+          theme_name: Javascript
+      description: Definition of a theme.
+    Category:
+      title: Category
+      type: object
+      description: Every Theme has a list of categories.
+      properties:
+        category_id:
+          type: string
+        category_name:
+          type: string
+      x-examples:
+        example-category:
+          category_id: '001'
+          category_name: Arrays
+    Test:
+      title: Test
+      type: object
+      properties:
+        id:
+          type: string
+      description: A Test
+    Question:
+      title: Question
+      type: object
+      properties:
+        id:
+          type: string
+      description: A question of the test.
